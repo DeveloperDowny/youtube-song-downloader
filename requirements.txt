@@ -1,0 +1,3 @@
+pydub
+youtube-search-python
+pytubefix
