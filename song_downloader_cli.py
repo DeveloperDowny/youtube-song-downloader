@@ -13,6 +13,17 @@ def ensure_output_folder_exists(folder):
     os.makedirs(folder, exist_ok=True)
 
 
+def clear_content(folder):
+    """Ensure the output folder exists."""
+    for file in os.listdir(folder):
+        file_path = os.path.join(folder, file)
+        try:
+            if os.path.isfile(file_path):
+                os.unlink(file_path)
+        except Exception as e:
+            print(e)
+
+
 def search_youtube(query):
     """Return the URL of the top YouTube search result for a given query."""
     search = VideosSearch(query, limit=1)
@@ -72,6 +83,7 @@ def main():
     args = parser.parse_args()
 
     ensure_output_folder_exists(args.output)
+    clear_content(args.output)
 
     for query in args.queries:
         download_and_convert(query, args.output)
